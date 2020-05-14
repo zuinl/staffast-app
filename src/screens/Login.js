@@ -9,9 +9,13 @@ import {
     BackHandler,
     TouchableOpacity,
     Linking,
+    Vibration,
     Alert,
-    StyleSheet } from 'react-native'
+    StyleSheet, 
+    Platform } from 'react-native'
 import { AsyncStorage } from 'react-native'
+import { Notifications } from 'expo'
+import * as Permissions  from 'expo-permissions'
 import { Entypo } from '@expo/vector-icons' 
 import { Feather } from '@expo/vector-icons'
 
@@ -54,6 +58,22 @@ export default class Login extends Component {
             return
         }
 
+        //Asking permission to send notifications
+        let notificationToken = ''
+        const notificationsPermission = await Permissions.getAsync(Permissions.NOTIFICATIONS)
+        if(notificationsPermission.status === 'granted') {
+            notificationToken = await Notifications.getExpoPushTokenAsync()
+            if(Platform.OS === 'android') {
+                Notifications.createChannelAndroidAsync('user_' + notificationToken, {
+                    name: 'user_' + notificationToken,
+                    sound: true,
+                    priority: 'max',
+                    vibrate: [0, 250, 250, 250]
+                })
+            }
+            this._notificationSubscription = Notifications.addListener(this._handleNotification)
+        }
+
         await fetch(`${server}/login.php`, {
             method: 'POST',
             headers: {
@@ -62,7 +82,8 @@ export default class Login extends Component {
             },
             body: JSON.stringify({
                 email: this.state.email,
-                senha: this.state.password
+                senha: this.state.password,
+                pushToken: notificationToken
             })
         }).then(async res => {
             const data = await res.json() 
@@ -81,6 +102,11 @@ export default class Login extends Component {
                 Alert.alert('Dados inválidos', 'Você provavelmente inseriu alguma informação errada ou não possui cadastro')
             }
         }).catch(err => showError(err))
+    }
+
+    _handleNotification = notification => {
+        Vibration.vibrate(200)
+        Vibration.cancel()
     }
 
     infoAlert = () => {

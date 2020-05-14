@@ -113,9 +113,9 @@ export default class Reunioes extends Component {
             if(data.sucesso) {
                 this.fetchReunioes()
             } else {
-                Alert.alert('Erro', 'Houve um erro ao alterar sua confirmação')
+                Alert.alert('Erro', '1- Houve um erro ao alterar sua confirmação')
             }
-        }).catch(err => Alert.alert('Erro', 'Houve um erro ao alterar sua confirmação'))
+        }).catch(err => Alert.alert('Erro', err+'2- Houve um erro ao alterar sua confirmação'))
 
         this.setState({ isLoading: false })
     }
