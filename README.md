@@ -49,3 +49,7 @@ Por motivo de segurança, o usuário é redirecionado para o *browser* para real
 que esteja disponível para o mesmo.
 
 ## Imagens de demonstração
+
+<img src="assets/img/Screenshot_20200507-174930.png" width="250">
+<img src="assets/img/Screenshot_20200507-174938.png" width="250">
+<img src="assets/img/Screenshot_20200511-191502.png" width="250">
