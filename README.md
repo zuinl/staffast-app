@@ -26,6 +26,7 @@ mais tempo para o crescimento do conhecimento com o React Native
 * Feedbacks (visualizar recebidos, enviados e enviar um novo)
 * Documentos
 * Reuniões (visualizar as para hoje, as próximas e as anteriores, podendo confirmar ou revogar presença)
+* Notificações *push*
 
 ### Registro de ponto eletrônico
 O registro de ponto eletrônico ocorre através de um toque em uma das 4 opções na tela. O usuário pode inserir uma observação, se quiser. O 
@@ -47,6 +48,10 @@ Uma tela única e simples, onde se distribuem _cards_ para exibir as reuniões.
 ### Documentos
 Por motivo de segurança, o usuário é redirecionado para o *browser* para realizar tarefas de autenticação antes de poder baixar um documento 
 que esteja disponível para o mesmo.
+
+### *Push Notifications*
+Quando um usuário recebe um novo feedback ou quando o ponto eletrônico é registrado com sucesso, uma notificação *push* é enviada para o dispositivo do usuário.
+Esta funcionalidade foi desenvolvida utilizando o *expo-notifications*
 
 ## Imagens de demonstração
 
